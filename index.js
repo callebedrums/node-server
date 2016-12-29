@@ -3,6 +3,7 @@ var express     = require('express');
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var jwt         = require('jsonwebtoken');
+var cors        = require('cors');
 
 var app = express();
 var port = process.env.PORT || 8080;
@@ -14,6 +15,9 @@ app.use(bodyParser.json());
 
 // log requests on console
 app.use(morgan('dev'));
+
+// enable cors
+app.use(cors());
 
 var router = express.Router();
 

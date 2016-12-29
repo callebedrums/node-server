@@ -2,12 +2,29 @@
 var bears = [];
 var nextId = 1;
 
+var middleware1 = function (erq, res, next) {
+    console.log('middleware 1');
+    next();
+};
+
+var middleware2 = function (erq, res, next) {
+    console.log('middleware 2');
+    next();
+};
+
+var middleware3 = function (erq, res, next) {
+    console.log('middleware 3');
+    next();
+};
+
 module.exports = {
     "/bears": {
-        get: function (req, res) {
+        all: [middleware1, middleware2],
+        get: [middleware3, function (req, res) {
             res.json(bears);
-        },
+        }],
         post: function (req, res) {
+            console.log(req.body)
             if (req.body.name) {
                 var bear = {
                     id: nextId++,
@@ -21,6 +38,7 @@ module.exports = {
         }
     },
     "/bears/:id": {
+        all: [middleware2, middleware1],
         get: function (req, res) {
             var bear = bears.find(function (b) {
                 return b.id === parseInt(req.params.id, 10);
