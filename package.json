@@ -7,7 +7,7 @@
     "test": "{src,test}/**/*.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- -R spec --recursive ./test",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --recursive ./test",
     "watch": "npm-watch"
   },
   "author": "",
