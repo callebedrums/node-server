@@ -19,8 +19,8 @@ var middleware3 = function (erq, res, next) {
 
 module.exports = {
     "/bears": {
-        all: [middleware1, middleware2],
-        get: [middleware3, function (req, res) {
+        all: [middleware1, middleware2], // adding middlewares to all methods for /bears endpoint
+        get: [middleware3, function (req, res) {  // adding middlewares only for GET /bears
             res.json(bears);
         }],
         post: function (req, res) {
@@ -38,7 +38,7 @@ module.exports = {
         }
     },
     "/bears/:id": {
-        all: [middleware2, middleware1],
+        all: [middleware2, middleware1], // order does matter
         get: function (req, res) {
             var bear = bears.find(function (b) {
                 return b.id === parseInt(req.params.id, 10);
